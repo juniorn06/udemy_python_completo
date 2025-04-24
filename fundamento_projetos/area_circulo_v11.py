@@ -2,7 +2,7 @@
 # import math
 from math import pi
 import sys
-#import errno
+import errno
 
 
 def circulo(raio):
@@ -17,9 +17,13 @@ def help():
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         help()
-        #sys.exit(errno.EPERM)
+        sys.exit(errno.EPERM)
 
-    else:
-        raio = sys.argv[1]
-        area = circulo(raio)
-        print('Área do circulo:', area)
+    if not sys.argv[1].isnumeric():
+        help()
+        print('O raio deve ser um valor numérico')
+        sys.exit(errno.EINVAL)
+
+    raio = sys.argv[1]
+    area = circulo(raio)
+    print('Área do circulo:', area)
